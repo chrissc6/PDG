@@ -10,6 +10,8 @@ namespace PigDice
 
         int GamesPlayed = 0;
         int GamesPlayed2 = 1;
+        int GamesLast = 0;
+        int Rolls2 = 0;
 
         public static void ClearCurrentConsoleLine()
         {
@@ -40,6 +42,7 @@ namespace PigDice
                 {
 
                     Rolls++;
+                    Rolls2++;
                     Die = RollDice();
                     if (Die != 1)
                     {
@@ -52,7 +55,7 @@ namespace PigDice
                 GamesPlayed2++;
 
                 ClearCurrentConsoleLine();
-                Console.Write($" Current Game: {GamesPlayed}, ");
+                Console.Write($" Current Game: {GamesPlayed} |");
             }
             return (Total, Rolls);
 
@@ -71,7 +74,9 @@ namespace PigDice
                 {
                     BestTotal = Total;
                     BestRolls = Rolls;
-                    Console.WriteLine($"Best game score is {BestTotal} in only {BestRolls} rolls. Games Played {GamesPlayed}");
+                    GamesLast = GamesPlayed - GamesLast;
+                    Console.WriteLine($"Score: {BestTotal} in {BestRolls} rolls."
+                        +$" | Games played since last win {GamesLast}, Total Rolls: {Rolls2}");
                 }
 
             }
